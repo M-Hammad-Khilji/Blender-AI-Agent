@@ -1,0 +1,67 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 459B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.23kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/ubuntu:24.04
+#3 DONE 7.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B 0.0s done
+#4 DONE 0.0s
+
+#5 [ 1/12] FROM docker.io/library/ubuntu:24.04@sha256:66460d557b25769b102175144d538d88219c077c678a49af4afca6fbfc1b5252
+#5 resolve docker.io/library/ubuntu:24.04@sha256:66460d557b25769b102175144d538d88219c077c678a49af4afca6fbfc1b5252 0.0s done
+#5 DONE 0.0s
+
+#6 [ 2/12] WORKDIR /app
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 179B 0.0s done
+#7 DONE 0.1s
+
+#8 [ 4/12] RUN mkdir -p /opt/blender
+#8 CACHED
+
+#9 [ 5/12] WORKDIR /opt/blender
+#9 CACHED
+
+#10 [ 6/12] RUN wget -q "https://download.blender.org/release/Blender4.2/blender-4.2.14-linux-x64.tar.xz"     && tar -xf blender-4.2.14-linux-x64.tar.xz     && rm blender-4.2.14-linux-x64.tar.xz     && mv blender-4.2.14-linux-x64 /opt/blender/current
+#10 CACHED
+
+#11 [ 7/12] WORKDIR /app
+#11 CACHED
+
+#12 [ 8/12] COPY server/ /app/server
+#12 CACHED
+
+#13 [ 9/12] COPY blender_agent/ /app/blender_agent
+#13 ERROR: failed to calculate checksum of ref eo4odopk2f59jrlau18p48l7w::t8fgirr1fpx8cr2hsc321yqgx: "/blender_agent": not found
+
+#14 [ 3/12] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates wget xz-utils tar libgl1 libx11-6 libxext6 libxrender1 libxrandr2 git python3 python3-pip python3-setuptools     && rm -rf /var/lib/apt/lists/*
+#14 CANCELED
+------
+ > [ 9/12] COPY blender_agent/ /app/blender_agent:
+------
+Dockerfile:23
+
+--------------------
+
+  21 |     WORKDIR /app
+
+  22 |     COPY server/ /app/server
+
+  23 | >>> COPY blender_agent/ /app/blender_agent
+
+  24 |     RUN pip3 install --no-cache-dir -r /app/server/requirements.txt || true
+
+  25 |     
+
+--------------------
+
+failed to solve: failed to compute cache key: failed to calculate checksum of ref eo4odopk2f59jrlau18p48l7w::t8fgirr1fpx8cr2hsc321yqgx: "/blender_agent": not found
+

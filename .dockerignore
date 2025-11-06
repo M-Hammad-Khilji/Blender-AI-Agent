@@ -1,0 +1,14 @@
+# Don't ignore frontend/build - we need it in the Docker image!
+# But we can ignore other things
+node_modules
+.git
+.gitignore
+*.md
+.env
+output/
+outputs/
+*.log
+build_fix.log
+build_output.log
+build.log
+
