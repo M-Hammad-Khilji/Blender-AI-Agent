@@ -1,0 +1,25 @@
+services:
+  blender_agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blender_ai_agent
+    restart: unless-stopped
+    environment:
+      - NEBIUS_API_KEY=${NEBIUS_API_KEY:-}
+      - DEV_FALLBACK=${DEV_FALLBACK:-0}
+      - MODEL_NAME=${MODEL_NAME:-NousResearch/Hermes-4-70B}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
+    volumes:
+      - ./output:/opt/app/output
+    ports:
+      - "8000:8000"
+    # GPU support (Docker Desktop with NVIDIA Container Toolkit)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
